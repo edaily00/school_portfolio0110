@@ -277,7 +277,6 @@ class Game:
         if q_pos != "H" and q_loc != "E":
             self.move_token(player, "q", roll)
 
-
     def play_game(self, player_list, turn_list):
         for player in player_list:
             if player.lower() == "A".lower():
