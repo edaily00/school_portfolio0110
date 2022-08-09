@@ -329,6 +329,6 @@ print(playera.get_token_p_step_count())
 print(playera.get_token_q_step_count())
 
 print(current)
-
+00
 """
 
