@@ -1,5 +1,9 @@
+#Eric Daily
+#Github Username: edaily00
+#8/11/2022
+#This program allows you to play the ludo game
 class Player:
-
+    """This class holds information about the player"""
     def __init__(self):
         self._start_place = None
         self._end_place = None
@@ -81,7 +85,7 @@ class Player:
 
 
 class PlayerA(Player):
-
+    """This class inherits the player and holds the final steps"""
     def __init__(self):
         super().__init__()
         self._start_place = 0
@@ -90,6 +94,7 @@ class PlayerA(Player):
 
 
 class PlayerB(Player):
+    """This class inherits the player and holds the final steps"""
 
     def __init__(self):
         super().__init__()
@@ -99,6 +104,7 @@ class PlayerB(Player):
 
 
 class PlayerC(Player):
+    """This class inherits the player and holds the final steps"""
 
     def __init__(self):
         super().__init__()
@@ -108,6 +114,7 @@ class PlayerC(Player):
 
 
 class PlayerD(Player):
+    """This class inherits the player and holds the final steps"""
 
     def __init__(self):
         super().__init__()
@@ -117,7 +124,7 @@ class PlayerD(Player):
 
 
 class LudoGame:
-
+    """This class is the game"""
     def __init__(self):
         self._players = {}
 
