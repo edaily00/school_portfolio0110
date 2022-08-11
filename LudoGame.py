@@ -324,8 +324,8 @@ class LudoGame:
         positions = []
         for player in self._players:
             player = self.get_player_by_position(player)
-            positions.append(str(player.get_space_name(player.get_token_p_step_count())))
-            positions.append(str(player.get_space_name(player.get_token_q_step_count())))
+            positions.append(player.get_space_name(player.get_token_p_step_count()))
+            positions.append(player.get_space_name(player.get_token_q_step_count()))
 
         return positions
 
