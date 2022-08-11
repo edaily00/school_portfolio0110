@@ -116,7 +116,7 @@ class PlayerD(Player):
         self._final_steps = ["D1", "D2", "D3", "D4", "D5", "D6", "E"]
 
 
-class Game:
+class LudoGame:
 
     def __init__(self):
         self._players = {}
@@ -149,7 +149,7 @@ class Game:
                     return "p"
                 elif q_pos == other_p_position or q_pos == other_q_position:
                     return "q"
-            return 'f'
+            return
 
 
     def move_token(self, player, token, steps):
@@ -160,9 +160,13 @@ class Game:
             player.add_p_step_count(steps)
             player.add_q_step_count(steps)
             if player.get_token_p_step_count() > finish_space:
-                new_steps = player.get_token_q_step_count() - finish_space
+                new_steps = player.get_token_p_step_count() - finish_space
                 player.set_p_step_count(finish_space - new_steps)
                 player.set_q_step_count(finish_space - new_steps)
+                return
+            elif player.get_token_p_step_count() == finish_space:
+                player.set_p_position("E")
+                player.set_q_position("E")
             player_position = player.get_space_name(player.get_token_p_step_count())
             for other in self._players:
                 other_player = self._players[other]
@@ -175,19 +179,27 @@ class Game:
                             other_player.set_q_step_count(-1)
                         other_player.set_p_step_count(-1)
                     elif player_position == other_q_position:
-                        other_player.get_token_q_step_count(-1)
+                        other_player.set_q_step_count(-1)
 
 
         elif token == "p":
             player.add_p_step_count(steps)
             if player.get_token_p_step_count() > finish_space:
-                new_steps = player.get_token_q_step_count() - finish_space
+                new_steps = player.get_token_p_step_count() - finish_space
                 player.set_p_step_count(finish_space - new_steps)
+                return
             elif player.get_token_p_step_count() == finish_space:
                 player.set_p_position("E")
-            if player.get_token_p_step_count() > 0:
+                return
+
+            player_position = player.get_space_name(player.get_token_p_step_count())
+            player_q_position = player.get_space_name(player.get_token_q_step_count())
+
+            if player_position == player_q_position:
+                player.set_stacked_true()
+
+            if 0 < player.get_token_p_step_count() < 51:
                 player_position = player.get_space_name(player.get_token_p_step_count())
-                player_q_position = player.get_space_name(player.get_token_q_step_count())
 
                 for other in self._players:
                     other_player = self._players[other]
@@ -200,20 +212,28 @@ class Game:
                                 other_player.set_q_step_count(-1)
                             other_player.set_p_step_count(-1)
                         elif player_position == other_q_position:
-                            other_player.get_token_q_step_count(-1)
-                    if player_position == player_q_position:
-                        player.set_stacked_true()
+                            other_player.set_q_step_count(-1)
+
+
 
         elif token == "q":
             player.add_q_step_count(steps)
             if player.get_token_q_step_count() > finish_space:
                 new_steps = player.get_token_q_step_count() - finish_space
                 player.set_q_step_count(finish_space - new_steps)
+                return
             elif player.get_token_q_step_count == finish_space:
                 player.set_q_position("E")
-            if player.get_token_q_step_count() > 0:
+                return
+
+            player_position = player.get_space_name(player.get_token_q_step_count())
+            player_p_position = player.get_space_name(player.get_token_p_step_count())
+
+            if player_position == player_p_position:
+                player.set_stacked_true()
+
+            if 0 < player.get_token_q_step_count() < 51:
                 player_position = player.get_space_name(player.get_token_q_step_count())
-                player_p_position = player.get_space_name(player.get_token_p_step_count())
 
                 for other in self._players:
                     other_player = self._players[other]
@@ -227,8 +247,7 @@ class Game:
                             other_player.set_p_step_count(-1)
                         elif player_position == other_q_position:
                             other_player.get_token_q_step_count(-1)
-                    if player_position == player_p_position:
-                        player.set_stacked_true()
+
 
     def decision_making(self, player, roll):
 
@@ -272,8 +291,8 @@ class Game:
 
         if p_pos != "H" and p_loc != "E":
             if p_steps <= q_steps or q_pos == "H":
-                    self.move_token(player, "p", roll)
-                    return
+                self.move_token(player, "p", roll)
+                return
         if q_pos != "H" and q_loc != "E":
             self.move_token(player, "q", roll)
 
@@ -293,7 +312,8 @@ class Game:
 
             player = self.get_player_by_position(turn[0])
             roll = turn[1]
-
+            print("P: " + str(player.get_token_p_step_count()))
+            print("Q: " + str(player.get_token_q_step_count()))
             if player.get_completed() is True:
                 return
             else:
@@ -309,25 +329,17 @@ class Game:
 
         return positions
 
-"""list_of_players = ("C", "A")
-list_of_turns = [('A', 6), ('A', 4), ('a', 6), ("a", 4), ('a', 48), ('a', 8), ('a', 4)]
+"""
+players = ['A','B']
+turns = [('A', 6),('A', 4),('A', 5),('A', 4),('A', 4),('A', 4),('A', 5),('A', 4),('A', 5),('A', 5),('A', 3),('A', 5),('A', 3),('A',
+6)]
+new = LudoGame()
 
-new = Game()
-
-current = new.play_game(list_of_players, list_of_turns)
-
-playera = new.get_player_by_position("a")
-playerc = new.get_player_by_position('c')
+current = new.play_game(players, turns)
 
 
-print(playera.get_space_name(playera.get_token_p_step_count()))
-print(playera.get_space_name(playera.get_token_q_step_count()))
-print(playerc.get_space_name(playerc.get_token_p_step_count()))
-print(playerc.get_space_name(playerc.get_token_q_step_count()))
-print(playera.get_token_p_step_count())
-print(playera.get_token_q_step_count())
 
 print(current)
-000
-"""
 
+
+"""
