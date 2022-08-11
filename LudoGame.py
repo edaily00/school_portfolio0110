@@ -45,9 +45,9 @@ class Player:
             return "R"
         elif steps > 0 and steps <= 50:
             if self._start_place + steps > 56:
-                return self._start_place + steps - 56
+                return str(self._start_place + steps - 56)
             else:
-                return self._start_place + steps
+                return str(self._start_place + steps)
         elif steps > 50:
             index = steps - 51
             return self._final_steps[index]
@@ -329,7 +329,7 @@ class LudoGame:
 
         return positions
 
-"""
+
 players = ['A','B']
 turns = [('A', 6),('A', 4),('A', 4),('A', 4),('A', 6),('A', 5),('A', 3),('B', 6),('B', 2),('A', 2),('A', 4)]
 new = LudoGame()
@@ -340,4 +340,3 @@ current = new.play_game(players, turns)
 
 print(current)
 
-"""
