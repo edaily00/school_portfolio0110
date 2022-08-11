@@ -340,6 +340,6 @@ current = new.play_game(players, turns)
 
 
 print(current)
-
+0
 
 """
