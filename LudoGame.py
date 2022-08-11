@@ -149,7 +149,7 @@ class LudoGame:
                     return "p"
                 elif q_pos == other_p_position or q_pos == other_q_position:
                     return "q"
-            return
+        return
 
 
     def move_token(self, player, token, steps):
@@ -329,10 +329,9 @@ class LudoGame:
 
         return positions
 
-"""
+
 players = ['A','B']
-turns = [('A', 6),('A', 4),('A', 5),('A', 4),('A', 4),('A', 4),('A', 5),('A', 4),('A', 5),('A', 5),('A', 3),('A', 5),('A', 3),('A',
-6)]
+turns = [('A', 6),('A', 4),('A', 4),('A', 4),('A', 6),('A', 5),('A', 3),('B', 6),('B', 2),('A', 2),('A', 4)]
 new = LudoGame()
 
 current = new.play_game(players, turns)
@@ -340,6 +339,4 @@ current = new.play_game(players, turns)
 
 
 print(current)
-000
 
-"""
