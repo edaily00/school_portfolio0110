@@ -329,7 +329,7 @@ class LudoGame:
 
         return positions
 
-
+"""
 players = ['A','B']
 turns = [('A', 6),('A', 4),('A', 4),('A', 4),('A', 6),('A', 5),('A', 3),('B', 6),('B', 2),('A', 2),('A', 4)]
 new = LudoGame()
@@ -340,3 +340,4 @@ current = new.play_game(players, turns)
 
 print(current)
 
+"""
