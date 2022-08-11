@@ -312,8 +312,8 @@ class LudoGame:
 
             player = self.get_player_by_position(turn[0])
             roll = turn[1]
-            print("P: " + str(player.get_token_p_step_count()))
-            print("Q: " + str(player.get_token_q_step_count()))
+            #print("P: " + str(player.get_token_p_step_count()))
+            #print("Q: " + str(player.get_token_q_step_count()))
             if player.get_completed() is True:
                 return
             else:
@@ -329,7 +329,7 @@ class LudoGame:
 
         return positions
 
-
+"""
 players = ['A','B']
 turns = [('A', 6),('A', 4),('A', 4),('A', 4),('A', 6),('A', 5),('A', 3),('B', 6),('B', 2),('A', 2),('A', 4)]
 new = LudoGame()
@@ -340,3 +340,4 @@ current = new.play_game(players, turns)
 
 print(current)
 
+"""
